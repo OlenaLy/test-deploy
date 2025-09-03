@@ -8,7 +8,7 @@ import mongoose from 'mongoose';
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const mongoUrl = process.env.MONGO_URL ||'mongodb://localhost:27017/madatabase&tls=true';
+const mongoUrl = process.env.MONGO_URL ||'mongodb://localhost:27017/madatabase/';
 
 mongoose.connect(mongoUrl,  {
   ssl: true,
@@ -32,7 +32,7 @@ app.get('/api/user', (req, res) => {
 });
 
 const port = process.env.PORT || 5555;
-const host = process.env.HOST || 'localhost';
+const host = process.env.HOST || '0.0.0.0';
 
 app.listen({ port, host })
   .then(() => {
