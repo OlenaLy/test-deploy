@@ -8,9 +8,12 @@ import mongoose from 'mongoose';
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const mongoUrl = process.env.MONGO_URL ||'mongodb://localhost:27017/madatabase';
+const mongoUrl = process.env.MONGO_URL ||'mongodb://localhost:27017/madatabase&tls=true';
 
-mongoose.connect(mongoUrl);
+mongoose.connect(mongoUrl,  {
+  ssl: true,
+  tlsAllowInvalidCertificates: false
+});
 
 mongoose.connection.on('open', () => {
   console.log('Mongo DB is connect');
