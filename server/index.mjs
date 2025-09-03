@@ -3,10 +3,21 @@ import fastifyStatic from '@fastify/static';
 import path from 'path';
 import url from 'url';
 import { error } from 'console';
+import mongoose from 'mongoose';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const mongoUrl = process.env.MONGO_URL ||'mongodb://localhost:27017/madatabase';
+
+mongoose.connect(mongoUrl);
+
+mongoose.connection.on('open', () => {
+  console.log('Mongo DB is connect');
+});
+mongoose.connection.on('error', () => {
+  console.log('Mongo DB is failed connect');
+});
 const app = fastify();
 
 app.register(fastifyStatic, {
